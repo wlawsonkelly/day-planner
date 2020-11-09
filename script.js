@@ -4,20 +4,40 @@ var currentHour = moment().toObject().hours
 console.log(currentHour);
 
 var descriptionEl = $(".description");
+var saveButtonEl = $(".saveBtn");
 
 $(document).ready(function() {
 
+function getCalendar() {
+    $("#9").text(localStorage.getItem("9"));
+   $("#10").text(localStorage.getItem('10'));
+   $("#11").text(localStorage.getItem("11"));
+   $("#12").text(localStorage.getItem("12"));
+   $("#13").text(localStorage.getItem("13"));
+   $("#14").text(localStorage.getItem("14"));
+   $("#15").text(localStorage.getItem("15"));
+   $("#16").text(localStorage.getItem("16"));
+   $("#17").text(localStorage.getItem("17"));
+}
+
 function checkCurrentTime() {
-    console.log($(".description"));
     console.log(parseInt($(".description").attr("id")));
    if (parseInt($(".description").attr("id")) > currentHour) {
-    $(".description").addClass(".future");
+    $(".description").addClass("future");
    } else if (parseInt($(".description").attr("id")) < currentHour) {
-    $(".description").addClass(".past");
+    $(".description").addClass("past");
    } else {
-    $(".description").addClass(".present");
+    $(".description").addClass("present");
    }
 }
+
+saveButtonEl.on("click", function(event) {
+    var parentId = $(this).parent().find(".description").attr('id');
+    console.log(parentId);
+    localStorage.setItem(parentId, $(this).parent().find(".description").text())
+})
+
+getCalendar();
 checkCurrentTime();
     
 });
