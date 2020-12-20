@@ -6,6 +6,8 @@ console.log(currentHour);
 var descriptionEl = $(".description");
 var saveButtonEl = $(".saveBtn");
 
+var elements = $(".description").parentNo
+
 $(document).ready(function() {
 
 function getCalendar() {
@@ -21,14 +23,16 @@ function getCalendar() {
 }
 
 function checkCurrentTime() {
-    console.log(parseInt($(".description").attr("id")));
-   if (parseInt($(".description").attr("id")) > currentHour) {
-    $(".description").addClass("future");
-   } else if (parseInt($(".description").attr("id")) < currentHour) {
-    $(".description").addClass("past");
+
+    descriptionEl.each( function(){
+    if (parseInt($(this).attr("id")) > currentHour) {
+    $(this).addClass("future");
+   } else if (parseInt($(this).attr("id")) < currentHour) {
+    $(this).addClass("past");
    } else {
-    $(".description").addClass("present");
+    $(this).addClass("present");
    }
+    })
 }
 
 saveButtonEl.on("click", function(event) {
